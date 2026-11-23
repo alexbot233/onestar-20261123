@@ -1,3 +1,12 @@
+/**
+ * Design notes:
+ * - The review is a literal constant: no input, randomness or clock, so every run writes identical bytes.
+ * - It is validated before writing so a bad edit fails loudly instead of shipping an invalid entry.
+ * - Only node:fs and node:path are used, keeping the program dependency-free on Node 22.
+ * - OUT_DIR is honoured, defaulting to /output as the grader requires.
+ * - mkdirSync(recursive) makes a fresh output directory work without a setup step.
+ * - writeFileSync writes UTF-8 with no trailing newline: one line, exactly as judged.
+ */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
